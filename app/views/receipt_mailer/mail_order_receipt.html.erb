@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Thank you for your order, <%= @order.email %></h1>
+    <p>
+      Here are the details of your order.<br>
+    </p>
+    <p>
+      <ul>
+        <%total = 0%>
+        <% @order.line_items.each do |line_item| %>
+          <% quantity = line_item['quantity'].to_i %>
+          <% if product = Product.find_by(id: line_item.product_id) %>
+            <% item_total = product.price * quantity %>
+            <% total += item_total %>
+          <% end %>
+          <li><%= product.name%> | QTY: <%= quantity %> | Price: <%= item_total %></li>
+        <% end %>
+      </ul>
+    <p>TOTAL: <%= total %></p>  
+    </p>
+    <p>Thanks for ordering and have a great day!</p>
+  </body>
+</html>

@@ -53,6 +53,7 @@ class OrdersController < ApplicationController
       end
     end
     order.save!
+    ReceiptMailer.mail_order_receipt(order).deliver_now
     order
   end
 
