@@ -1,0 +1,11 @@
+<% user = User.find_by_id(user_id)%>
+
+<dt>Description</dt>
+<dd><%= description %></dd>
+<dt>Rating</dt>
+<dd><%= rating %></dd>
+<dt>Posted by</dt>
+<dd><%= user.first_name %> <%= user.last_name %></dd>
+<% if current_user.id == user_id%>
+  <div>DELETE</div>
+<% end %>
