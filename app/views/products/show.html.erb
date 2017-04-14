@@ -27,7 +27,20 @@
     </div>
 
     <div class="row">
-      <div class="col-sm-12">
+
+      <div class="col-sm-4">
+        <%= form_for([@product, @review]) do |f|%>
+          <div class="form-group">
+            Description: <%= f.text_field :description, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            Rating: <%= f.select :rating, ['1', '2', '3', '4', '5']%>
+          </div>
+          <%= f.submit 'Submit', class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+
+      <div class="col-sm-8">
         <dl class="dl-horizontal">
           <% @product.reviews.each do |review| %>
             <%= render 'review', user_id: review.user_id, description: review.description, rating: review.rating %>
