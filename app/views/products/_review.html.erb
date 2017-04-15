@@ -1,11 +1,11 @@
 <% @user = User.find_by_id(user_id)%>
 
-<div class="title">Description</div>
-<div><%= description %></div>
-<div class="title">Rating</div>
-<div><%= rating %></div>
-<div class="title">Posted by</div>
-<div><%= @user.first_name %> <%= @user.last_name %></div>
+<div class="review-divider"></div>
+<div class="description"><%= description %></div>
+<div class="rating text-right">
+  Rating: <% rating.times do %><span class="star-full">★</span><% end %><% (5-rating).times do %><span class="star-empty">☆</span><% end %>  
+</div>
+<div class="reviewer text-right">Posted by: <%= @user.first_name %> <%= @user.last_name %></div>
 <% if current_user && current_user.id == user_id%>
-  <%= link_to "Delete", product_review_path(@product, id), class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
+  <div class="delete text-right"><%= link_to "Delete", product_review_path(@product, id), class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></div>
 <% end %>

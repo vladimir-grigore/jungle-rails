@@ -86,6 +86,34 @@ main section.products-show {
 }
 
 .reviews {
-  padding: 20px;
-  
+  padding-top: 20px;
+
+  .description {
+    padding: 10px 10px 10px 0px;
+    line-height: 2em;
+  }
+
+  .reviewer {
+    padding: 5px 0px;
+  }
+
+  .review-divider {
+    border-bottom: 1px solid grey;
+  }
+
+  div.delete {
+    padding: 10px;
+  }
+
+  span.star-full{
+    color: gold;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+  }
+
+  span.star-empty{
+    color: white;
+    -webkit-text-stroke-width: 0.7px;
+    -webkit-text-stroke-color: black;
+  }
 }
