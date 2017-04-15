@@ -28,13 +28,14 @@
 
   </article>
 
+  <article class="reviews">
     <div class="row">
       <div class="col-sm-8">
-        <dl class="dl-horizontal">
+        <div class="dl-horizontal">
             <% @product.reviews.order('created_at DESC').each do |review| %>
-              <%= render 'review', user_id: review.user_id, description: review.description, rating: review.rating %>
+              <%= render 'review', user_id: review.user_id, description: review.description, rating: review.rating, id: review.id %>
             <% end %>
-        </dl>
+        </div>
       </div>
 
       <% if current_user %>
@@ -54,5 +55,6 @@
       <% end %>
 
     </div>
+  </article>
 
 </section>

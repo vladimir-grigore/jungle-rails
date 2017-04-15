@@ -1,11 +1,11 @@
 <% @user = User.find_by_id(user_id)%>
 
-<dt>Description</dt>
-<dd><%= description %></dd>
-<dt>Rating</dt>
-<dd><%= rating %></dd>
-<dt>Posted by</dt>
-<dd><%= @user.first_name %> <%= @user.last_name %></dd>
+<div class="title">Description</div>
+<div><%= description %></div>
+<div class="title">Rating</div>
+<div><%= rating %></div>
+<div class="title">Posted by</div>
+<div><%= @user.first_name %> <%= @user.last_name %></div>
 <% if current_user && current_user.id == user_id%>
-  <div>DELETE</div>
+  <%= link_to "Delete", product_review_path(@product, id), class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
 <% end %>
