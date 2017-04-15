@@ -117,3 +117,10 @@ main section.products-show {
     -webkit-text-stroke-color: black;
   }
 }
+
+#review-form {
+  input {
+    position: relative;
+    float: right;
+  }
+}

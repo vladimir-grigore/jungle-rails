@@ -41,18 +41,20 @@
 
       <% if current_user %>
         <div class="col-sm-4">
-         <h2>Add a review</h2>
-          <%= form_for([@product, @product.reviews.build]) do |f|%>
-            <p>
-              <%= f.label :description %>
-              <%= f.text_area :description, class: 'form-control' %>
-            </p>
-            <p class="form-group">
-              <%= f.label :rating %>
-              <%= f.select :rating, ['1', '2', '3', '4', '5']%>
-            </p>
-              <div class="text-right"><%= f.submit 'Submit', class: 'btn btn-primary' %></div>
-          <% end %>
+          <div id="review-form">
+            <h2>Add a review</h2>
+            <%= form_for([@product, @product.reviews.build]) do |f|%>
+              <p>
+                <%= f.label :description %>
+                <%= f.text_area :description, class: 'form-control' %>
+              </p>
+              <div><%= f.submit 'Submit', class: 'btn btn-primary' %></div>
+              <p class="form-group">
+                <%= f.label :rating %>
+                <%= f.select :rating, ['1', '2', '3', '4', '5']%>
+              </p>
+            <% end %>
+          </div>
         </div>
       <% end %>
 
