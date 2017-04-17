@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+
   describe 'Validations' do
 
     it 'should save if all required fields are present' do
@@ -129,6 +130,70 @@ RSpec.describe User, type: :model do
       expect(@user).to_not be_persisted
     end
 
+  end
+
+  describe '.authenticate_with_credentials' do
+
+    it 'should not log in the user with invalid email' do
+      User.create(first_name: "Test_firstName",
+        last_name: "Test_lastName",
+        email: "test2@test.com",
+        password: "test1234",
+        password_confirmation: "test1234")
+      @existing_user = User.authenticate_with_credentials("test@test.com", "test1234") 
+      expect(@existing_user).to be nil
+    end
+
+    it 'should not log in the user with invalid password' do
+      User.create(first_name: "Test_firstName",
+        last_name: "Test_lastName",
+        email: "test2@test.com",
+        password: "test1234",
+        password_confirmation: "test1234")
+      @existing_user = User.authenticate_with_credentials("test2@test.com", "test1") 
+      expect(@existing_user).to be nil
+    end
+
+    it 'should log in the user with valid email and password' do
+      User.create(first_name: "Test_firstName",
+        last_name: "Test_lastName",
+        email: "test2@test.com",
+        password: "test1234",
+        password_confirmation: "test1234")
+      @existing_user = User.authenticate_with_credentials("test2@test.com", "test1234") 
+      expect(@existing_user).to be_a User
+    end
+
+    it 'should log in the user with email containing whitespaces' do
+      User.create(first_name: "Test_firstName",
+        last_name: "Test_lastName",
+        email: "test2@test.com",
+        password: "test1234",
+        password_confirmation: "test1234")
+      @existing_user = User.authenticate_with_credentials("  test2@test.com  ", "test1234")
+      expect(@existing_user).to be_a User
+    end
+
+    it 'should log in the user with email containing mixed case' do
+      User.create(first_name: "Test_firstName",
+        last_name: "Test_lastName",
+        email: "test2@test.com",
+        password: "test1234",
+        password_confirmation: "test1234")
+      @existing_user = User.authenticate_with_credentials("tEsT2@TeSt.com", "test1234")
+      expect(@existing_user).to be_a User
+    end
+
+    it 'should log in the user with email containing mixed case' do
+      User.create(first_name: "Test_firstName",
+        last_name: "Test_lastName",
+        email: "tEsT2@TeSt.com",
+        password: "test1234",
+        password_confirmation: "test1234")
+      @existing_user = User.authenticate_with_credentials("test2@test.com", "test1234")
+      expect(@existing_user).to be_a User
+    end
+    
   end
   
 end
